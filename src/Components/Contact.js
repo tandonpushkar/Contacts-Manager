@@ -11,7 +11,7 @@ import PropTypes from "prop-types";
 import Box from "@material-ui/core/Box";
 import EmailIcon from "@material-ui/icons/Email";
 import PhoneAndroidOutlinedIcon from "@material-ui/icons/PhoneAndroidOutlined";
-
+import { Consumer } from "../context";
 const Styles = {
   card: {
     maxWidth: 500
@@ -22,41 +22,57 @@ const Styles = {
 };
 
 class Contact extends React.Component {
-  handleClick = () => {
-    this.props.deleteClickHandler();
+  handleClick = (id, dispatch) => {
+    dispatch({ type: "DELETE_CONTACT", payload: id });
   };
 
   render() {
+    const { id, name, email, phone } = this.props;
     return (
-      <Box p={1} bgcolor="background.paper">
-        <Card className={this.props.classes.card}>
-          <CardActionArea>
-            <CardMedia
-              className={this.props.classes.media}
-              image="https://api.adorable.io/avatars/206/abott@adorable.png"
-              title="Contemplative Reptile"
-            />
-            <CardContent>
-              <Typography gutterBottom variant="h5" component="h2">
-                {this.props.name}
-              </Typography>
-              <Typography variant="body2" color="textSecondary" component="p">
-                <EmailIcon /> {this.props.email}
-                <br />
-                <PhoneAndroidOutlinedIcon /> {this.props.phone}
-              </Typography>
-            </CardContent>
-          </CardActionArea>
-          <CardActions>
-            <Button size="small" color="primary">
-              Share
-            </Button>
-            <Button onClick={this.handleClick} size="small" color="secondary">
-              Delete
-            </Button>
-          </CardActions>
-        </Card>
-      </Box>
+      <Consumer>
+        {value => {
+          const { dispatch } = value;
+          return (
+            <Box p={1} bgcolor="background.paper">
+              <Card className={this.props.classes.card}>
+                <CardActionArea>
+                  <CardMedia
+                    className={this.props.classes.media}
+                    image="https://api.adorable.io/avatars/206/abott@adorable.png"
+                    title="Contemplative Reptile"
+                  />
+                  <CardContent>
+                    <Typography gutterBottom variant="h5" component="h2">
+                      {name}
+                    </Typography>
+                    <Typography
+                      variant="body2"
+                      color="textSecondary"
+                      component="p"
+                    >
+                      <EmailIcon /> {email}
+                      <br />
+                      <PhoneAndroidOutlinedIcon /> {phone}
+                    </Typography>
+                  </CardContent>
+                </CardActionArea>
+                <CardActions>
+                  <Button size="small" color="primary">
+                    Share
+                  </Button>
+                  <Button
+                    onClick={this.handleClick.bind(this, id, dispatch)}
+                    size="small"
+                    color="secondary"
+                  >
+                    Delete
+                  </Button>
+                </CardActions>
+              </Card>
+            </Box>
+          );
+        }}
+      </Consumer>
     );
   }
 }
