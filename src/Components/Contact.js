@@ -1,72 +1,78 @@
 import React from "react";
-import ExpansionPanel from "@material-ui/core/ExpansionPanel";
-import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
-import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
-import Typography from "@material-ui/core/Typography";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import ExpansionPanelActions from "@material-ui/core/ExpansionPanelActions";
-import Divider from "@material-ui/core/Divider";
+import { withStyles } from "@material-ui/core/styles";
+import Card from "@material-ui/core/Card";
+import CardActionArea from "@material-ui/core/CardActionArea";
+import CardActions from "@material-ui/core/CardActions";
+import CardContent from "@material-ui/core/CardContent";
+import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import Avatar from "@material-ui/core/Avatar";
-import EmailIcon from "@material-ui/icons/Email";
-import PhoneIcon from "@material-ui/icons/Phone";
+import Typography from "@material-ui/core/Typography";
 import PropTypes from "prop-types";
+import Box from "@material-ui/core/Box";
+import EmailIcon from "@material-ui/icons/Email";
+import PhoneAndroidOutlinedIcon from "@material-ui/icons/PhoneAndroidOutlined";
 
-export default class Contact extends React.Component {
-  HandleClick = () => {
+const Styles = {
+  card: {
+    maxWidth: 300
+  },
+  media: {
+    height: 100
+  }
+};
+
+class Contact extends React.Component {
+  handleClick = () => {
     this.props.deleteClickHandler();
   };
 
   render() {
     return (
-      <div>
-        <ExpansionPanel>
-          <ExpansionPanelSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel1a-content"
-            id="panel1a-header"
-          >
-            <Typography>{this.props.name}</Typography>
-          </ExpansionPanelSummary>
-          <ExpansionPanelDetails>
-            <List>
-              <ListItem>
-                <ListItemAvatar>
-                  <Avatar>
-                    <EmailIcon />
-                  </Avatar>
-                </ListItemAvatar>
-                <ListItemText primary="Email" secondary={this.props.email} />
-              </ListItem>
-              <ListItem>
-                <ListItemAvatar>
-                  <Avatar>
-                    <PhoneIcon />
-                  </Avatar>
-                </ListItemAvatar>
-                <ListItemText primary="Phone" secondary={this.props.phone} />
-              </ListItem>
-            </List>
-          </ExpansionPanelDetails>
-          <Divider />
-          <ExpansionPanelActions>
+      <Box p={1} bgcolor="background.paper">
+        <Card className={this.props.classes.card}>
+          <CardActionArea>
+            <CardMedia
+              className={this.props.classes.media}
+              image="https://api.adorable.io/avatars/206/abott@adorable.png"
+              title="Contemplative Reptile"
+            />
+            <CardContent>
+              <Typography gutterBottom variant="h5" component="h2">
+                {this.props.name}
+              </Typography>
+              <Typography variant="body2" color="textSecondary" component="p">
+                <EmailIcon /> {this.props.email}
+                <br />
+                <PhoneAndroidOutlinedIcon /> {this.props.phone}
+              </Typography>
+            </CardContent>
+          </CardActionArea>
+          <CardActions>
             <Button size="small" color="primary">
-              Edit
+              Share
             </Button>
-            <Button onClick={this.HandleClick} size="small" color="secondary">
+            <Button onClick={this.handleClick} size="small" color="secondary">
               Delete
             </Button>
-          </ExpansionPanelActions>
-        </ExpansionPanel>
-      </div>
+          </CardActions>
+        </Card>
+      </Box>
     );
   }
 }
 
 Contact.propTypes = {
-  deleteClickHandler: PropTypes.func.isRequired
+  classes: PropTypes.object.isRequired
 };
+
+export default withStyles(Styles)(Contact);
+
+// HandleClick = () => {
+//   this.props.deleteClickHandler();
+// };
+
+// onClick={this.HandleClick}
+
+// Contact.propTypes = {
+//   deleteClickHandler: PropTypes.func.isRequired
+// };

@@ -1,5 +1,7 @@
 import React from "react";
 import Contact from "./Contact";
+import Box from "@material-ui/core/Box";
+
 export default class Contacts extends React.Component {
   state = {
     contacts: [
@@ -33,16 +35,18 @@ export default class Contacts extends React.Component {
 
   render() {
     return (
-      <div>
+      <Box display="flex" p={3} m={3} bgcolor="background.paper">
         {this.state.contacts.map(c => (
-          <Contact
-            name={c.name}
-            email={c.email}
-            phone={c.phone}
-            deleteClickHandler={this.deleteContact.bind(this, c.id)}
-          />
+          <div key={c.id}>
+            <Contact
+              name={c.name}
+              email={c.email}
+              phone={c.phone}
+              deleteClickHandler={this.deleteContact.bind(this, c.id)}
+            />
+          </div>
         ))}
-      </div>
+      </Box>
     );
   }
 }
