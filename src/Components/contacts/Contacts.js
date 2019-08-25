@@ -1,7 +1,7 @@
 import React from "react";
 import Contact from "./Contact";
 import Box from "@material-ui/core/Box";
-import { Consumer } from "../context";
+import { Consumer } from "../../context";
 
 export default class Contacts extends React.Component {
   // deleteContact = id => {

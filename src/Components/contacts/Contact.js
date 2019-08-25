@@ -11,7 +11,7 @@ import PropTypes from "prop-types";
 import Box from "@material-ui/core/Box";
 import EmailIcon from "@material-ui/icons/Email";
 import PhoneAndroidOutlinedIcon from "@material-ui/icons/PhoneAndroidOutlined";
-import { Consumer } from "../context";
+import { Consumer } from "../../context";
 const Styles = {
   card: {
     maxWidth: 500
