@@ -14,7 +14,7 @@ import PhoneAndroidOutlinedIcon from "@material-ui/icons/PhoneAndroidOutlined";
 
 const Styles = {
   card: {
-    maxWidth: 300
+    maxWidth: 500
   },
   media: {
     height: 100
@@ -66,13 +66,3 @@ Contact.propTypes = {
 };
 
 export default withStyles(Styles)(Contact);
-
-// HandleClick = () => {
-//   this.props.deleteClickHandler();
-// };
-
-// onClick={this.HandleClick}
-
-// Contact.propTypes = {
-//   deleteClickHandler: PropTypes.func.isRequired
-// };

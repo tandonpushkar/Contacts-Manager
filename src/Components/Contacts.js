@@ -7,20 +7,20 @@ export default class Contacts extends React.Component {
     contacts: [
       {
         id: 1,
-        name: "Pushkar",
+        name: "Pushkar Tandon",
         email: "tandonpushkar@gmail.com",
         phone: "96768768"
       },
       {
         id: 2,
-        name: "Harddik",
-        email: "kakdbab@gmail.com",
+        name: "Salman Khan",
+        email: "khansalman@gmail.com",
         phone: "96676876"
       },
       {
         id: 3,
-        name: "Kartik",
-        email: "ahhaijljall@gmail.com",
+        name: "Katrina Kaif",
+        email: "kaifkatrina@gmail.com",
         phone: "9676686868"
       }
     ]
@@ -34,9 +34,15 @@ export default class Contacts extends React.Component {
   };
 
   render() {
+    let FilteredContact = this.state.contacts.filter(c => {
+      return (
+        c.name.toLowerCase().indexOf(this.props.HandleSearch.toLowerCase()) !==
+        -1
+      );
+    });
     return (
       <Box display="flex" p={3} m={3} bgcolor="background.paper">
-        {this.state.contacts.map(c => (
+        {FilteredContact.map(c => (
           <div key={c.id}>
             <Contact
               name={c.name}
