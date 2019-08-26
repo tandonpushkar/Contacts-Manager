@@ -4,13 +4,6 @@ import Box from "@material-ui/core/Box";
 import { Consumer } from "../../context";
 
 export default class Contacts extends React.Component {
-  // deleteContact = id => {
-  //   const newContacts = this.state.contacts.filter(c => c.id !== id);
-  //   this.setState({
-  //     contacts: newContacts
-  //   });
-  // };
-
   render() {
     return (
       <Consumer>
