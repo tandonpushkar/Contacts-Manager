@@ -26,7 +26,13 @@ export default class Contacts extends React.Component {
           //Search
 
           return (
-            <Box display="flex" p={3} m={3} bgcolor="background.paper">
+            <Box
+              display="flex"
+              flexWrap="wrap"
+              p={3}
+              m={3}
+              bgcolor="background.paper"
+            >
               {FilteredContact.map(c => (
                 <div key={c.id}>
                   <Contact

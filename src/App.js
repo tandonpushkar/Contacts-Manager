@@ -1,8 +1,12 @@
 import React from "react";
 import Header1 from "./Components/layout/Header1";
 import Contacts from "./Components/contacts/Contacts";
-import AddContact from "./Components/contacts/AddContact";
+import AddContact1 from "./Components/contacts/AddContact1";
 import Provider from "./context";
+import About from "./Components/pages/About";
+
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+
 export default class App extends React.Component {
   state = {
     search: ""
@@ -17,11 +21,24 @@ export default class App extends React.Component {
   render() {
     return (
       <Provider>
-        <div>
-          <Header1 changeHandler={this.HandleChange} />
-          <AddContact />
-          <Contacts HandleSearch={this.state.search} />
-        </div>
+        <Router>
+          <div>
+            <Header1 changeHandler={this.HandleChange} />
+            <div>
+              <Switch>
+                <Route
+                  exact
+                  path="/"
+                  render={props => (
+                    <Contacts {...props} HandleSearch={this.state.search} />
+                  )}
+                />
+                <Route path="/addcontact" component={AddContact1} />
+                <Route path="/about" component={About} />
+              </Switch>
+            </div>
+          </div>
+        </Router>
       </Provider>
     );
   }
